@@ -1,0 +1,387 @@
+[{
+    "Success": {
+      "location": {
+        "accuracy": 0.01
+      },
+      "matches": [
+        {
+          "frequencyskew": 0.00004029274,
+          "id": "211602423",
+          "offset": 22.061083984,
+          "timeskew": 0.00064110756
+        },
+        {
+          "frequencyskew": 0.0004028082,
+          "id": "668062330",
+          "offset": 60.990792968,
+          "timeskew": 0.0014462471
+        }
+      ],
+      "tagid": "65343178-007E-462D-B157-A22C2C8F0C29",
+      "timestamp": 1700316664051,
+      "timezone": "Europe/Moscow",
+      "track": {
+        "albumadamid": "1440824019",
+        "artists": [
+          [
+            "Object"
+          ]
+        ],
+        "genres": {
+          "primary": "Pop"
+        },
+        "highlightsurls": {
+          "artisthighlightsurl": "https://cdn.shazam.com/video/v3/en-US/GB/iphone/277293880/highlights?affiliate=mttnagencyid%3Ds2n%26mttnsiteid%3D125115%26mttn3pid%3DApple-Shazam%26mttnsub1%3DShazam_ios%26mttnsub2%3D5348615A-616D-3235-3830-44754D6D5973%26itscg%3D30201%26app%3Dmusic%26itsct%3DShazam_ios"
+        },
+        "hub": {
+          "actions": [
+            "Array"
+          ],
+          "displayname": "APPLE MUSIC",
+          "explicit": false,
+          "image": "https://images.shazam.com/static/icons/hub/ios/v5/applemusic_{scalefactor}.png",
+          "options": [
+            "Array"
+          ],
+          "providers": [
+            "Array"
+          ],
+          "type": "APPLEMUSIC"
+        },
+        "images": {
+          "background": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/2c/7d/5e/2c7d5ec0-bad6-5fb6-08f2-ccfd94aa2985/pr_source.png/800x800cc.jpg",
+          "coverart": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/65/1b/f6/651bf621-fcf2-e3ba-4ef4-22645f26e0a0/11UMGIM12477.rgb.jpg/400x400cc.jpg",
+          "coverarthq": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/65/1b/f6/651bf621-fcf2-e3ba-4ef4-22645f26e0a0/11UMGIM12477.rgb.jpg/400x400cc.jpg",
+          "joecolor": "b:040809p:f3f2eds:c9c9c9t:c3c3c0q:a1a2a2"
+        },
+        "isrc": "USUM71106449",
+        "key": "53510886",
+        "layout": "5",
+        "myshazam": {
+          "apple": [
+            "Object"
+          ]
+        },
+        "relatedtracksurl": "https://cdn.shazam.com/shazam/v3/en-US/GB/iphone/-/tracks/track-similarities-id-53510886?startFrom=0&pageSize=20&connected=",
+        "sections": [
+          [
+            "Object"
+          ],
+          [
+            "Object"
+          ],
+          [
+            "Object"
+          ],
+          [
+            "Object"
+          ]
+        ],
+        "share": {
+          "avatar": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/2c/7d/5e/2c7d5ec0-bad6-5fb6-08f2-ccfd94aa2985/pr_source.png/800x800cc.jpg",
+          "href": "https://www.shazam.com/track/53510886/bloody-mary",
+          "html": "https://www.shazam.com/snippets/email-share/53510886?lang=en-US&country=GB",
+          "image": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/65/1b/f6/651bf621-fcf2-e3ba-4ef4-22645f26e0a0/11UMGIM12477.rgb.jpg/400x400cc.jpg",
+          "snapchat": "https://www.shazam.com/partner/sc/track/53510886",
+          "subject": "Bloody Mary - Lady Gaga",
+          "text": "Bloody Mary by Lady Gaga",
+          "twitter": "I used @Shazam to discover Bloody Mary by Lady Gaga."
+        },
+        "subtitle": "Lady Gaga",
+        "title": "Bloody Mary",
+        "type": "MUSIC",
+        "url": "https://www.shazam.com/track/53510886/bloody-mary",
+        "urlparams": {
+          "{trackartist}": "Lady+Gaga",
+          "{tracktitle}": "Bloody+Mary"
+        }
+      }
+    }
+  },
+
+    {
+            "Success": {
+            "location": { "accuracy": 0.01 },
+            "matches": [
+            {
+                "frequencyskew": 0.00008058548,
+                "id": "669520659",
+                "offset": 11.462635742,
+                "timeskew": -0.00069850683
+            },
+            {
+                "frequencyskew": -0.00024163723,
+                "id": "674003605",
+                "offset": 11.464662109,
+                "timeskew": -0.0012862682
+            }
+            ],
+            "tagid": "053A142F-2501-4711-BA68-A57A1E738B3C",
+            "timestamp": 1700317616976,
+            "timezone": "Europe/Moscow",
+            "track": {
+            "albumadamid": "1690685331",
+            "artists": [ ["Object"] ],
+            "genres": { "primary": "Hip-Hop/Rap" },
+            "highlightsurls": {
+                "artisthighlightsurl": "https://cdn.shazam.com/video/v3/en-US/GB/iphone/670534462/highlights?affiliate=mttnagencyid%3Ds2n%26mttnsiteid%3D125115%26mttn3pid%3DApple-Shazam%26mttnsub1%3DShazam_ios%26mttnsub2%3D5348615A-616D-3235-3830-44754D6D5973%26itscg%3D30201%26app%3Dmusic%26itsct%3DShazam_ios"
+            },
+            "hub": {
+                "actions": ["Array"],
+                "displayname": "APPLE MUSIC",
+                "explicit": false,
+                "image": "https://images.shazam.com/static/icons/hub/ios/v5/applemusic_{scalefactor}.png",
+                "options": ["Array"],
+                "providers": ["Array"],
+                "type": "APPLEMUSIC"
+            },
+            "images": {
+                "background": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages116/v4/73/b9/31/73b931cf-28ae-d248-fcd0-a52fd5dd19a8/4253e999-9fb5-45fe-a040-d6085082dfd6_ami-identity-e28ee99feb872b1d45ee8f94f9a0603f-2023-06-08T20-52-07.721Z_cropped.png/800x800cc.jpg",
+                "coverart": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c9/ca/6b/c9ca6b51-87a9-4a13-d37f-24535687023d/23UMGIM63882.rgb.jpg/400x400cc.jpg",
+                "coverarthq": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c9/ca/6b/c9ca6b51-87a9-4a13-d37f-24535687023d/23UMGIM63882.rgb.jpg/400x400cc.jpg",
+                "joecolor": "b:000000p:ff02e3s:ff0d00t:cb02b5q:cb0a00"
+            },
+            "isrc": "USUM72308540",
+            "key": "668274012",
+            "layout": "5",
+            "myshazam": { "apple": ["Object"] },
+            "relatedtracksurl": "https://cdn.shazam.com/shazam/v3/en-US/GB/iphone/-/tracks/track-similarities-id-668274012?startFrom=0&pageSize=20&connected=",
+            "sections": [ ["Object"], ["Object"], ["Object"] ],
+            "share": {
+                "avatar": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages116/v4/73/b9/31/73b931cf-28ae-d248-fcd0-a52fd5dd19a8/4253e999-9fb5-45fe-a040-d6085082dfd6_ami-identity-e28ee99feb872b1d45ee8f94f9a0603f-2023-06-08T20-52-07.721Z_cropped.png/800x800cc.jpg",
+                "href": "https://www.shazam.com/track/668274012/am-i-dreaming",
+                "html": "https://www.shazam.com/snippets/email-share/668274012?lang=en-US&country=GB",
+                "image": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c9/ca/6b/c9ca6b51-87a9-4a13-d37f-24535687023d/23UMGIM63882.rgb.jpg/400x400cc.jpg",
+                "snapchat": "https://www.shazam.com/partner/sc/track/668274012",
+                "subject": "Am I Dreaming - Metro Boomin, A$AP Rocky & Roisee",
+                "text": "Am I Dreaming by Metro Boomin, A$AP Rocky & Roisee",
+                "twitter": "I used @Shazam to discover Am I Dreaming by Metro Boomin, A$AP Rocky & Roisee."
+            },
+            "subtitle": "Metro Boomin, A$AP Rocky & Roisee",
+            "title": "Am I Dreaming",
+            "type": "MUSIC",
+            "url": "https://www.shazam.com/track/668274012/am-i-dreaming",
+            "urlparams": {
+                "{trackartist}": "Metro+Boomin%2C+A%24AP+Rocky+%26+Roisee",
+                "{tracktitle}": "Am+I+Dreaming"
+            }
+            }
+        }
+    },
+
+    {
+        "Success": {
+        "location": { "accuracy": 0.01 },
+        "matches": [
+          {
+            "frequencyskew": 0.00008058548,
+            "id": "669520659",
+            "offset": 11.462635742,
+            "timeskew": -0.00069850683
+          },
+          {
+            "frequencyskew": -0.00024163723,
+            "id": "674003605",
+            "offset": 11.464662109,
+            "timeskew": -0.0012862682
+          }
+        ],
+        "tagid": "053A142F-2501-4711-BA68-A57A1E738B3C",
+        "timestamp": 1700317616976,
+        "timezone": "Europe/Moscow",
+        "track": {
+          "albumadamid": "1690685331",
+          "artists": [ ["Object"] ],
+          "genres": { "primary": "Hip-Hop/Rap" },
+          "highlightsurls": {
+            "artisthighlightsurl": "https://cdn.shazam.com/video/v3/en-US/GB/iphone/670534462/highlights?affiliate=mttnagencyid%3Ds2n%26mttnsiteid%3D125115%26mttn3pid%3DApple-Shazam%26mttnsub1%3DShazam_ios%26mttnsub2%3D5348615A-616D-3235-3830-44754D6D5973%26itscg%3D30201%26app%3Dmusic%26itsct%3DShazam_ios"
+          },
+          "hub": {
+            "actions": ["Array"],
+            "displayname": "APPLE MUSIC",
+            "explicit": false,
+            "image": "https://images.shazam.com/static/icons/hub/ios/v5/applemusic_{scalefactor}.png",
+            "options": ["Array"],
+            "providers": ["Array"],
+            "type": "APPLEMUSIC"
+          },
+          "images": {
+            "background": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages116/v4/73/b9/31/73b931cf-28ae-d248-fcd0-a52fd5dd19a8/4253e999-9fb5-45fe-a040-d6085082dfd6_ami-identity-e28ee99feb872b1d45ee8f94f9a0603f-2023-06-08T20-52-07.721Z_cropped.png/800x800cc.jpg",
+            "coverart": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c9/ca/6b/c9ca6b51-87a9-4a13-d37f-24535687023d/23UMGIM63882.rgb.jpg/400x400cc.jpg",
+            "coverarthq": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c9/ca/6b/c9ca6b51-87a9-4a13-d37f-24535687023d/23UMGIM63882.rgb.jpg/400x400cc.jpg",
+            "joecolor": "b:000000p:ff02e3s:ff0d00t:cb02b5q:cb0a00"
+          },
+          "isrc": "USUM72308540",
+          "key": "668274012",
+          "layout": "5",
+          "myshazam": { "apple": ["Object"] },
+          "relatedtracksurl": "https://cdn.shazam.com/shazam/v3/en-US/GB/iphone/-/tracks/track-similarities-id-668274012?startFrom=0&pageSize=20&connected=",
+          "sections": [ ["Object"], ["Object"], ["Object"] ],
+          "share": {
+            "avatar": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages116/v4/73/b9/31/73b931cf-28ae-d248-fcd0-a52fd5dd19a8/4253e999-9fb5-45fe-a040-d6085082dfd6_ami-identity-e28ee99feb872b1d45ee8f94f9a0603f-2023-06-08T20-52-07.721Z_cropped.png/800x800cc.jpg",
+            "href": "https://www.shazam.com/track/668274012/am-i-dreaming",
+            "html": "https://www.shazam.com/snippets/email-share/668274012?lang=en-US&country=GB",
+            "image": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c9/ca/6b/c9ca6b51-87a9-4a13-d37f-24535687023d/23UMGIM63882.rgb.jpg/400x400cc.jpg",
+            "snapchat": "https://www.shazam.com/partner/sc/track/668274012",
+            "subject": "Am I Dreaming - Metro Boomin, A$AP Rocky & Roisee",
+            "text": "Am I Dreaming by Metro Boomin, A$AP Rocky & Roisee",
+            "twitter": "I used @Shazam to discover Am I Dreaming by Metro Boomin, A$AP Rocky & Roisee."
+          },
+          "subtitle": "Metro Boomin, A$AP Rocky & Roisee",
+          "title": "Am I Dreaming",
+          "type": "MUSIC",
+          "url": "https://www.shazam.com/track/668274012/am-i-dreaming",
+          "urlparams": {
+            "{trackartist}": "Metro+Boomin%2C+A%24AP+Rocky+%26+Roisee",
+            "{tracktitle}": "Am+I+Dreaming"
+          }
+        }
+      }
+      },
+      {
+        "Success": {
+        "location": { "accuracy": 0.01 },
+        "matches": [
+          {
+            "frequencyskew": -0.00020134449,
+            "id": "540893784",
+            "offset": 11.578055663999999,
+            "timeskew": 0.000662446
+          }
+        ],
+        "tagid": "F914F280-D208-4984-9842-CA223810B6B9",
+        "timestamp": 1700318524535,
+        "timezone": "Europe/Moscow",
+        "track": {
+          "albumadamid": "1535612019",
+          "artists": [ ["Object"] ],
+          "genres": { "primary": "K-Pop" },
+          "highlightsurls": {
+            "artisthighlightsurl": "https://cdn.shazam.com/video/v3/en-US/GB/iphone/1439420229/highlights?affiliate=mttnagencyid%3Ds2n%26mttnsiteid%3D125115%26mttn3pid%3DApple-Shazam%26mttnsub1%3DShazam_ios%26mttnsub2%3D5348615A-616D-3235-3830-44754D6D5973%26itscg%3D30201%26app%3Dmusic%26itsct%3DShazam_ios"
+          },
+          "hub": {
+            "actions": ["Array"],
+            "displayname": "APPLE MUSIC",
+            "explicit": false,
+            "image": "https://images.shazam.com/static/icons/hub/ios/v5/applemusic_{scalefactor}.png",
+            "options": ["Array"],
+            "providers": ["Array"],
+            "type": "APPLEMUSIC"
+          },
+          "images": {
+            "background": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/ae/d9/22/aed92229-5af0-bf82-4398-31044a313fd6/pr_source.png/800x800cc.jpg",
+            "coverart": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e9/20/1d/e9201dbe-2717-8f0d-2dda-de6b13826685/811395035818.png/400x400cc.jpg",
+            "coverarthq": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e9/20/1d/e9201dbe-2717-8f0d-2dda-de6b13826685/811395035818.png/400x400cc.jpg",
+            "joecolor": "b:11111bp:afc9fds:9ac7fft:8fa4cfq:7ea2d1"
+          },
+          "isrc": "QZH6S1900275",
+          "key": "540893784",
+          "layout": "5",
+          "myshazam": { "apple": ["Object"] },
+          "relatedtracksurl": "https://cdn.shazam.com/shazam/v3/en-US/GB/iphone/-/tracks/track-similarities-id-540893784?startFrom=0&pageSize=20&connected=",
+          "sections": [ ["Object"], ["Object"], ["Object"], ["Object"] ],
+          "share": {
+            "avatar": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/ae/d9/22/aed92229-5af0-bf82-4398-31044a313fd6/pr_source.png/800x800cc.jpg",
+            "href": "https://www.shazam.com/track/540893784/villain-feat-kim-petras-league-of-legends",
+            "html": "https://www.shazam.com/snippets/email-share/540893784?lang=en-US&country=GB",
+            "image": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e9/20/1d/e9201dbe-2717-8f0d-2dda-de6b13826685/811395035818.png/400x400cc.jpg",
+            "snapchat": "https://www.shazam.com/partner/sc/track/540893784",
+            "subject": "VILLAIN (feat. Kim Petras & League of Legends) - K/DA & Madison Beer",
+            "text": "VILLAIN (feat. Kim Petras & League of Legends) by K/DA & Madison Beer",
+            "twitter": "I used @Shazam to discover VILLAIN (feat. Kim Petras & League of Legends) by K/DA & Madison Beer."
+          },
+          "subtitle": "K/DA & Madison Beer",
+          "title": "VILLAIN (feat. Kim Petras & League of Legends)",
+          "type": "MUSIC",
+          "url": "https://www.shazam.com/track/540893784/villain-feat-kim-petras-league-of-legends",
+          "urlparams": {
+            "{trackartist}": "K%2FDA+%26+Madison+Beer",
+            "{tracktitle}": "VILLAIN+%28feat.+Kim+Petras+%26+League+of+Legends%29"
+          }
+        }
+      }},
+      {
+        "Success": {
+        "location": { "accuracy": 0.01 },
+        "matches": [
+          {
+            "frequencyskew": 0.00096702576,
+            "id": "588472236",
+            "offset": 2.777863769,
+            "timeskew": 0.0012580156
+          },
+          {
+            "frequencyskew": 0.0003222227,
+            "id": "565532882",
+            "offset": 2.899091308,
+            "timeskew": -0.0010276437
+          },
+          {
+            "frequencyskew": -0.00016111135,
+            "id": "574602710",
+            "offset": 2.552941162,
+            "timeskew": 0.0017149448
+          },
+          {
+            "frequencyskew": -0.00010740757,
+            "id": "571276630",
+            "offset": 7.611216796,
+            "timeskew": 0.008296251
+          }
+        ],
+        "tagid": "19E5B2B8-750F-46CB-944D-DBB5D17E776B",
+        "timestamp": 1700318663572,
+        "timezone": "Europe/Moscow",
+        "track": {
+          "albumadamid": "1547525310",
+          "artists": [ ["Object"] ],
+          "genres": { "primary": "Hip-Hop/Rap" },
+          "highlightsurls": {
+            "artisthighlightsurl": "https://cdn.shazam.com/video/v3/en-US/GB/iphone/1313094981/highlights?affiliate=mttnagencyid%3Ds2n%26mttnsiteid%3D125115%26mttn3pid%3DApple-Shazam%26mttnsub1%3DShazam_ios%26mttnsub2%3D5348615A-616D-3235-3830-44754D6D5973%26itscg%3D30201%26app%3Dmusic%26itsct%3DShazam_ios&videoIdToFilter=1550803638",
+            "trackhighlighturl": "https://cdn.shazam.com/video/v3/en-US/GB/iphone/highlights/1550803638?affiliate=mttnagencyid%3Ds2n%26mttnsiteid%3D125115%26mttn3pid%3DApple-Shazam%26mttnsub1%3DShazam_ios%26mttnsub2%3D5348615A-616D-3235-3830-44754D6D5973%26itscg%3D30201%26app%3Dmusic%26itsct%3DShazam_ios"
+          },
+          "hub": {
+            "actions": ["Array"],
+            "displayname": "APPLE MUSIC",
+            "explicit": true,
+            "image": "https://images.shazam.com/static/icons/hub/ios/v5/applemusic_{scalefactor}.png",
+            "options": ["Array"],
+            "providers": ["Array"],
+            "type": "APPLEMUSIC"
+          },
+          "images": {
+            "background": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages122/v4/dc/41/34/dc413470-4913-ee7b-d5e5-b2308035ad8c/588d5bb7-b12d-425d-85c7-a8dc6b5f9217_ami-identity-cdf2415e996ecf0cd4b284d958529cc0-2022-12-15T23-44-19.228Z_cropped.png/800x800cc.jpg",
+            "coverart": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/83/eb/59/83eb59d9-629d-5f60-7a6b-a2cb0b70ebd1/075679793102.jpg/400x400cc.jpg",
+            "coverarthq": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/83/eb/59/83eb59d9-629d-5f60-7a6b-a2cb0b70ebd1/075679793102.jpg/400x400cc.jpg",
+            "joecolor": "b:c3dfe3p:262a2es:283339t:454e52q:47555b"
+          },
+          "isrc": "USAT22100017",
+          "key": "469270443",
+          "layout": "5",
+          "myshazam": { "apple": ["Object"] },
+          "relatedtracksurl": "https://cdn.shazam.com/shazam/v3/en-US/GB/iphone/-/tracks/track-similarities-id-469270443?startFrom=0&pageSize=20&connected=",
+          "sections": [ ["Object"], ["Object"], ["Object"], ["Object"] ],
+          "share": {
+            "avatar": "https://is1-ssl.mzstatic.com/image/thumb/AMCArtistImages122/v4/dc/41/34/dc413470-4913-ee7b-d5e5-b2308035ad8c/588d5bb7-b12d-425d-85c7-a8dc6b5f9217_ami-identity-cdf2415e996ecf0cd4b284d958529cc0-2022-12-15T23-44-19.228Z_cropped.png/800x800cc.jpg",
+            "href": "https://www.shazam.com/track/469270443/astronaut-in-the-ocean",
+            "html": "https://www.shazam.com/snippets/email-share/469270443?lang=en-US&country=GB",
+            "image": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/83/eb/59/83eb59d9-629d-5f60-7a6b-a2cb0b70ebd1/075679793102.jpg/400x400cc.jpg",
+            "snapchat": "https://www.shazam.com/partner/sc/track/469270443",
+            "subject": "Astronaut In The Ocean - Masked Wolf",
+            "text": "Astronaut In The Ocean by Masked Wolf",
+            "twitter": "I used @Shazam to discover Astronaut In The Ocean by Masked Wolf."
+          },
+          "subtitle": "Masked Wolf",
+          "title": "Astronaut In The Ocean",
+          "type": "MUSIC",
+          "url": "https://www.shazam.com/track/469270443/astronaut-in-the-ocean",
+          "urlparams": {
+            "{trackartist}": "Masked+Wolf",
+            "{tracktitle}": "Astronaut+In+The+Ocean"
+          }
+        }
+      }
+      }
+
+
+]
