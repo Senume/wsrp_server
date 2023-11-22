@@ -45,7 +45,9 @@ class History {
       } catch (error) {
         console.error("couldnt add", error);
       }
-    } else {
+    }
+    // else add a new history
+    else {
       try {
         const InsertResult = await collection.insertOne({
           name: name,
@@ -68,19 +70,3 @@ class History {
 }
 
 export default History;
-
-/* Example Use
-
-async function tryHistory() {
-  const Host = new History("mongodb://0.0.0.0:27017", "Songs");
-
-  await Host.AddHistory({
-    name: "Viswes",
-    songs: ["The Nights", "The Moon", "The Eve"],
-  });
-
-  await Host.UpdateHistory("Viswes", ["The T", "The U", "The V"]);
-}
-
-// tryHistory();
-*/

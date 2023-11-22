@@ -4,9 +4,8 @@ import { platform } from "os";
 
 /* PLaylist Class for managing playlist
    Supported Functionalities
-   1. make a new playlist : MakePlaylist({playlist}) 
-   2. Update a Playlist : UpdatePlaylist(name, editorname, updatesong,decision(add/remove)) 
-   3. Find a Playlist : FindPlaylist(playlistname) 
+   1. Update a Playlist : UpdatePlaylist(playlist details) 
+   2. Find a Playlist : FindPlaylist(playlistname) 
   */
 class Playlist {
   constructor(uri, dbName) {
@@ -17,7 +16,7 @@ class Playlist {
   }
 
   // Add a playlist to the collection by {name , songs} dictionary
-  async MakePlaylist(playlist) {
+  async UpdatePlaylist(playlist) {
     // connect
     {
       try {
@@ -27,17 +26,51 @@ class Playlist {
         console.error("Error connecting to the database:", error);
       }
     }
-
-    try {
-      const database = this.client.db(this.dbName);
-      const collection = database.collection(this.bucketName);
-
-      const insertResult = await collection.insertOne(playlist);
-      console.log(`Inserted document with ID: ${insertResult.insertedId}`);
-    } catch (error) {
-      console.error("Error inserting document:", error);
+    const database = this.client.db(this.dbName);
+    const collection = database.collection(this.bucketName);
+    const existingDocument = await collection.findOne({
+      name: playlist.name,
+    });
+    let result;
+    if (!existingDocument) {
+      try {
+        const insertResult = await collection.insertOne(playlist);
+        console.log(`Inserted document with ID: ${insertResult.insertedId}`);
+        result = insertResult.insertedId;
+      } catch (error) {
+        console.error("Error inserting document:", error);
+      }
+    } else {
+      if (playlist.decision == "add") {
+        try {
+          const updateResult = await collection.updateMany(
+            { name: playlist.name },
+            {
+              $set: { editor: playlist.editor },
+              $push: { songs: { $each: playlist.songs } },
+            }
+          );
+          // console.log(`Added into ${updateResult.modifiedCount} document`);
+          result = updateResult.modifiedCount;
+        } catch (error) {
+          console.error("Error updating document:", error);
+        }
+      } else if (playlist.decision == "remove") {
+        try {
+          const updateResult = await collection.updateMany(
+            { name: playlist.name },
+            {
+              $set: { editor: playlist.editor },
+              $pull: { songs: { $in: playlist.songs } },
+            }
+          );
+          console.log(`Updated from ${updateResult.modifiedCount} document`);
+          result = updateResult.modifiedCount;
+        } catch (error) {
+          console.error("Error updating document:", error);
+        }
+      }
     }
-
     // close
     {
       try {
@@ -47,53 +80,7 @@ class Playlist {
         console.error("Error closing the connection:", error);
       }
     }
-  }
-
-  // edit the playlist
-  async UpdatePlaylist(toupdate, editorname, ChangeSongs, decision) {
-    try {
-      await this.client.connect();
-      console.log("Connected to the database");
-    } catch (error) {
-      console.error("Error connecting to the database:", error);
-    }
-    const database = this.client.db(this.dbName);
-    const collection = database.collection(this.bucketName);
-
-    if (decision == "add") {
-      try {
-        const updateResult = await collection.updateMany(
-          { name: toupdate },
-          {
-            $set: { editor: editorname },
-            $push: { songs: { $each: ChangeSongs } },
-          }
-        );
-        console.log(`Added into ${updateResult.modifiedCount} document`);
-      } catch (error) {
-        console.error("Error updating document:", error);
-      }
-    } else if (decision == "remove") {
-      try {
-        const updateResult = await collection.updateMany(
-          { name: toupdate },
-          {
-            $set: { editor: editorname },
-            $pull: { songs: { $in: ChangeSongs } },
-          }
-        );
-        console.log(`Removed from ${updateResult.modifiedCount} document`);
-      } catch (error) {
-        console.error("Error updating document:", error);
-      }
-    }
-
-    try {
-      await this.client.close();
-      console.log("Connection closed");
-    } catch (error) {
-      console.error("Error closing the connection:", error);
-    }
+    return result;
   }
 
   // find the playlist
@@ -134,32 +121,3 @@ class Playlist {
 
 // module.exports = Playlist;
 export default Playlist;
-
-/* Example Use
-const PlaylistHandler = new Playlist("mongodb://0.0.0.0:27017", "Songs");
-
-async function runPlaylist() {
-  await PlaylistHandler.MakePlaylist({
-    name: "Liked Songs",
-    songs: ["The Nights", "The Oldies", "The newons"],
-  });
-
-  // await PlaylistHandler.UpdatePlaylist(
-  //   "Liked Songs",
-  //   "Viswes",
-  //   ["The Eves", "The Mornings"],
-  //   "add"
-  // );
-
-  await PlaylistHandler.UpdatePlaylist(
-    "Liked Songs",
-    "Viswes",
-    ["The Nights", "The Oldies"],
-    "remove"
-  );
-
-  console.log(PlaylistHandler.FindPlaylist("The Nights"));
-}
-
-// runPlaylist();
-*/

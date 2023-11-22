@@ -43,7 +43,7 @@ class Songs {
 
       readStream.pipe(writeStream);
 
-      return new Promise((resolve, reject) => {
+      await new Promise((resolve, reject) => {
         writeStream.on("finish", resolve);
         writeStream.on("error", reject);
       });
@@ -60,6 +60,8 @@ class Songs {
         console.error("Error closing the connection:", error);
       }
     }
+
+    return "Added";
   }
 
   /* download the song with the 'title' to the destination
@@ -88,7 +90,7 @@ class Songs {
       // Pipe the file data to the local file
       readStream.pipe(writeStream);
 
-      return new Promise((resolve, reject) => {
+      await new Promise((resolve, reject) => {
         writeStream.on("finish", resolve);
         writeStream.on("error", reject);
       });
@@ -101,32 +103,8 @@ class Songs {
     } catch (error) {
       console.error("Error closing the connection:", error);
     }
+    return "Downloaded";
   }
 }
 
 export default Songs;
-
-/*
-Example Usage
-
-// Example usage
-const mongoDBHandler = new Songs("mongodb://0.0.0.0:27017", "Songs");
-
-async function runSongDB() {
-  await mongoDBHandler.uploadMP3File(
-    "C:/Users/Visweswaran/Downloads/Nights.mp3",
-    {
-      filename: "Nights.mp3",
-      title: "The Nights",
-      artist: "Avici",
-    }
-  );
-
-  await mongoDBHandler.downloadMP3File(
-    "The Nights",
-    "C:/Users/Visweswaran/Downloads/FromNights.mp3"
-  );
-}
-
-// Run the example
-// runSongDB(); */

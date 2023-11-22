@@ -14,6 +14,7 @@ class Database {
   }
 }
 
+// module.exports = Database;
 export default Database;
 
 // Example usage in Trial.js

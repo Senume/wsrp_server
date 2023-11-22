@@ -4,9 +4,8 @@ import { platform } from "os";
 
 /* Users class for managing users
    Functionalities provided
- * Add users : AddUser(user)
  * Find users : Finduser(user name)
- * update user details : UpdateUser(user name, {update fields})
+ * update user details : UpdateUser({update fields})
  */
 
 class Users {
@@ -18,7 +17,7 @@ class Users {
   }
 
   // add a new user to the collection
-  async AddUser(user) {
+  async UpdateUser(user) {
     // connectf
     {
       try {
@@ -28,15 +27,34 @@ class Users {
         console.error("Error connecting to the database:", error);
       }
     }
+    const database = this.client.db(this.dbName);
+    const collection = database.collection(this.bucketName);
 
-    try {
-      const database = this.client.db(this.dbName);
-      const collection = database.collection(this.bucketName);
+    const existingDocument = await collection.findOne({
+      username: user.username,
+    });
 
-      const insertResult = await collection.insertOne(user);
-      console.log(`Inserted document with ID: ${insertResult.insertedId}`);
-    } catch (error) {
-      console.error("Error inserting document:", error);
+    let result;
+    if (!existingDocument) {
+      try {
+        const insertResult = await collection.insertOne(user);
+        console.log(`Inserted document with ID: ${insertResult.insertedId}`);
+        result = insertResult.insertedId;
+      } catch (error) {
+        console.error("Error inserting document:", error);
+      }
+    } else {
+      try {
+        const UpdateResult = await collection.updateOne(
+          { username: user.username },
+          { $set: user }
+        );
+        console.log(`updated ${UpdateResult.modifiedCount}`);
+        result = UpdateResult.modifiedCount;
+        console.log(typeof result);
+      } catch (error) {
+        console.error("couldnt update", error);
+      }
     }
 
     // close
@@ -48,11 +66,12 @@ class Users {
         console.error("Error closing the connection:", error);
       }
     }
+    return result;
   }
 
   // find the user from the collection
   // returns the user details as array
-  async Finduser(name) {
+  async Finduser(username) {
     {
       try {
         await this.client.connect();
@@ -62,11 +81,12 @@ class Users {
       }
     }
     let findResult;
+
     try {
       const database = this.client.db(this.dbName);
       const collection = database.collection(this.bucketName);
 
-      findResult = await collection.find({ name: name }).toArray();
+      findResult = await collection.find({ username: username }).toArray();
     } catch (error) {
       console.error("error finding them", error);
     }
@@ -81,52 +101,5 @@ class Users {
     }
     return findResult;
   }
-
-  // updates the user details
-  async UpdateUser(name, update) {
-    {
-      try {
-        await this.client.connect();
-        console.log("Connected");
-      } catch (error) {
-        console.error("cpuldnt connect");
-      }
-    }
-
-    const database = this.client.db(this.dbName);
-    const collection = database.collection(this.bucketName);
-
-    try {
-      const UpdateResult = await collection.updateOne(
-        { name: name },
-        { $set: update }
-      );
-      console.log(`updated ${UpdateResult.modifiedCount}`);
-    } catch (error) {
-      console.error("couldnt update");
-    }
-
-    try {
-      await this.client.close();
-      console.log("DisConnected");
-    } catch (error) {
-      console.error("cpuldnt Disconnect");
-    }
-  }
 }
 export default Users;
-
-/* Example Use
-// module.exports = Users;
-async function musictry() {
-  const manager = new Users("mongodb://0.0.0.0:27017", "Songs");
-  await manager.AddUser({
-    name: "Viswes",
-    age: 16,
-  });
-  console.log(await manager.Finduser("Viswes"));
-  await manager.UpdateUser("Viswes", { age: 18, gender: "male" });
-}
-
-// musictry();
-*/
