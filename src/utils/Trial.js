@@ -47,3 +47,5 @@ await DataBase.SongsDB.downloadMP3File(
   "TheNights",
   "C:/Users/Visweswaran/Downloads/FromNights.mp3"
 );
+
+// the streaming will be available in http://localhost:3000/stream/SongName
