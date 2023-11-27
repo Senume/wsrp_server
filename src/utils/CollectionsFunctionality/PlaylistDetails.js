@@ -119,7 +119,7 @@ class PlayListDetails {
             const Collection = DataBase.collection(this.BucketName);
 
             // Finding the first document in the collection
-            const Cursor = await Collection.find({'UserId': {$eq: Document_User_ID}}, { projection: { _id: 0 } });
+            const Cursor = Collection.find({'UserId': {$eq: Document_User_ID}}, { projection: { _id: 0 } });
             const DocumentArray = await Cursor.toArray();
             
 
