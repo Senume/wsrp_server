@@ -1,4 +1,4 @@
-import { MongoClient, GridFSBucket } from "mongodb";
+import { MongoClient} from "mongodb";
 import fs from "fs";
 import { platform } from "os";
 
@@ -8,11 +8,11 @@ import { platform } from "os";
    2. Find a Playlist : FindPlaylist(playlistname) 
   */
 class Playlist {
-  constructor(uri, dbName) {
-    this.uri = uri;
-    this.dbName = dbName;
-    this.bucketName = "Playlist";
-    this.client = new MongoClient(this.uri);
+  constructor(URI, dbName) {
+    this.URI = URI;
+    this.DBName = dbName;
+    this.BucketName = "PlaylistDetails";
+    this.Client = new MongoClient(this.uri);
   }
 
   // Add a playlist to the collection by {name , songs} dictionary
@@ -119,5 +119,4 @@ class Playlist {
   }
 }
 
-// module.exports = Playlist;
 export default Playlist;
