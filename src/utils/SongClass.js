@@ -19,9 +19,7 @@ export default class Song {
     }
     
     /** 
-     * Generates a unique Id for the object created. It uses hashing and the 
-     * details of the song to generate the unique ID. This need to be called 
-     * separately. Not integrated with constructor.
+     * @function GenerateHashID Generates a unique Id for the object created. It uses hashing and the details of the song to generate the unique ID. This need to be called separately. Not integrated with constructor.
      * @returns {number} Unique ID for the object created.
     */
     GenerateHashID() {

@@ -1,4 +1,4 @@
-import Database from "./DatabaseClass.js";
+import Database from "../src/utils/Collections/DatabaseClass.js";
 // const { Database } = require("./DatabaseClass");
 
 const DB = new Database("mongodb://0.0.0.0:27017", "Songs");
