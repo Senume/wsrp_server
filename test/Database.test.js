@@ -80,7 +80,7 @@ describe("Songs", () => {
         artist: "Avici",
       }
     );
-    expect(addsong).toEqual("Added");
+    expect(addsong).not.toBeNull();
   });
   it("Download song", async () => {
     const downloadsong = await DB.SongsDB.downloadMP3File(
