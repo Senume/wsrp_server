@@ -37,17 +37,39 @@ app.post('/login', async (req, res) => {
   else res.status(403).send("Invalid username or password")
 })
 
-// Handle song details based on ID
-app.get('/songdetails/:songid', (req, res) => {})
+// Returns song details based on ID
+app.get('/songdetails/:songid', async (req, res) => {
+
+  const SongID = req.params.songid;
+  const SongDetails = await DatabaseObject.SongDetails.FindaDocument(SongID);
+  if (SongDetails) res.status(200).send(SongDetails); else res.status(404).send('No such song exists');
+
+})
 
 // Return Playlist information based ID
-app.get('/playlistdetails/:playlistid', (req, res) => {})
+app.get('/playlistdetails/:playlistid', async (req, res) => {
+  const PlaylistID = req.params.playlistid
+  const PlaylistDetails = await DatabaseObject.PlaylistDB.FindaPlaylist(PlaylistID);
+  if(PlaylistDetails) res.status(200).send(PlaylistDetails); else res.status(404).send('Playlist not available');
 
-// Gets information of a playlist based on its user ID
-app.get('/playlistdetails/User/:userid', (req,res) => {})
+})
+
+// Retrives information on playlist based on its user ID
+app.get('/playlistdetails/User/:userid', async (req,res) => {
+
+  const UserID = req.params.userid
+  const PlaylistDetails = await DatabaseObject.PlaylistDB.FindaUserPlaylist(UserID);
+  if(PlaylistDetails.length !== 0) res.status(200).send(PlaylistDetails); else res.status(404).send('Playlist not available');
+
+})
 
 // Updates users state on the database
-app.post('/userupdate', (req,res) => {})
+app.post('/userupdate', (req,res) => {
+
+  const userData = req.body;
+  DatabaseObject.UsersDB.UpdateUser(userData);
+
+})
 
 
 app.listen(port, () => {
