@@ -1,8 +1,5 @@
 import axios from 'axios';                  // Library to call API endpoints
-import dotenv from 'dotenv';                // Provides a platform to have environment variables
-
-
-                            
+import dotenv from 'dotenv';                // Provides a platform to have environment variables         
 
 /**
  * @constructor Class to provide recognition functionality for given audio samples.
@@ -10,9 +7,7 @@ import dotenv from 'dotenv';                // Provides a platform to have envir
  * @param {Formdata} AudioForm The Sample audio is passed and stored as formdata.
  */
 export default class Recognition{
-    constructor(userid){
-        this.UserID = userid;
-        // this.AudioSample = AudioForm;
+    constructor(){
         this.endpoint = 'https://shazam-api7.p.rapidapi.com/songs/recognize-song';
     }
 
@@ -20,22 +15,32 @@ export default class Recognition{
      * @function ProcessRecognition Function provides interface to invoking the recognition functionality just a function call.
      * @returns {object} Containing the details of the song.
      */
-    async ProcessRecognition(DataForm) {
+    async ProcessRecognition(base64) {
         // Initialize the environment variables
         dotenv.config();
 
-        // Configuration of the 'Music Identity' API endpoint.
         const options = {
-            method: 'POST',
-            headers: {
-              'X-RapidAPI-Key': process.env.APIKEY,
-              'X-RapidAPI-Host': process.env.APIHOST,
-              ...DataForm.getHeaders(),
-            },
-            body: DataForm
-        };
 
-        return await axios.post(this.endpoint, Data, options);
+            method: 'POST',
+            url: 'https://shazam.p.rapidapi.com/songs/detect',
+            headers: {
+              'content-type': 'text/plain',
+              'X-RapidAPI-Key': process.env.APIKEY,
+              'X-RapidAPI-Host': process.env.APIHOST
+            },
+            data: base64
+          };
+          
+          try {
+              const response = await axios.request(options);
+              console.log(response.data);
+              return response.data;
+          } catch (error) {
+              console.error(error);
+        }
+        
+
+        
         
     };
 

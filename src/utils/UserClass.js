@@ -5,7 +5,7 @@ export default  class User {
      * @param {any} username Unique ID for logged-in user
      * @param {any} password password to grant access token to logged-in user.
      */
-    constructor(username, password) {
+    constructor(username) {
         this.Username = username;
         this.Email =null;
         this.UserType = null;
@@ -44,7 +44,7 @@ export default  class User {
 
     CreatePlaylist(playlistname){console.log("Create Playlist query initiated")};
 
-    AddToPlaylist(playlistid){console.log("Add a song to respective playlist")};
+    AddToPlaylist(playlistid, songid){console.log("Add a song to respective playlist")};
 
     RegisterUser(username, password){console.log("Register the user")};
 }

@@ -10,11 +10,12 @@ import hashIt from "hash-it";               // Library to handle Hash functional
  */
 export default class Song {
 
-    constructor(songTitle, songArtist, songRelease, songDuration){
+    constructor(songTitle, songArtist, songRelease, songDuration, uri){
         this.SongTitle = songTitle;                                                                     // Song Details - Title
         this.SongArtist = songArtist;                                                                   // Song Details - Artist        
         this.SongRelease = songRelease;                                                                 // Song Details - Release
-        this.SongDuration = songDuration;                                                               // Song Details - Duration
+        this.SongDuration = songDuration;  
+        this.CoverURL = uri                                                             // Song Details - Duration
         this.ID = 0;                                                                                    // Unique ID will be generated based on the Song Details
     }
     
@@ -37,7 +38,8 @@ export default class Song {
             title: this.songTitle,
             artist: this.songArtist,
             duration: this.SongDuration,
-            release: this.songRelease
+            release: this.songRelease,
+            coverURL: this.CoverURL
         }
         return Details;
     }

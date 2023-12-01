@@ -37,7 +37,7 @@ export default class Recognition{
             body: DataForm
         };
 
-        return await axios.post(this.endpoint, Data, options);
+        return await axios.post(this.endpoint, DataForm, options);
         
     };
 
@@ -46,16 +46,18 @@ export default class Recognition{
 
 const Data = new FormData();
 Data.append('audio', fs.createReadStream("/home/senume/Project/FullStack/wsrp_server/test/SampleAudio/Song_5.mp3"));
+
+console.log(Data);
 // console.log(Data);
 
-const RecognitionObject = new Recognition("test/SampleAudio/Song_1.mp3");
-const Output = RecognitionObject.ProcessRecognition(Data);
-Output.then(response => {
-    if (response.status === 200) {
-        console.log('Success:', response.data);
-    } else {
-        console.error('Error:', response.status, response.statusText);
-    }
-}).catch(error => {
-    console.error('Error:', error);
-});
+// const RecognitionObject = new Recognition("test/SampleAudio/Song_1.mp3");
+// const Output = RecognitionObject.ProcessRecognition(Data);
+// Output.then(response => {
+//     if (response.status === 200) {
+//         console.log('Success:', response.data);
+//     } else {
+//         console.error('Error:', response.status, response.statusText);
+//     }
+// }).catch(error => {
+//     console.error('Error:', error);
+// });
