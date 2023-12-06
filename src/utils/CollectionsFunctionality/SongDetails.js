@@ -62,7 +62,7 @@ class SongDetails {
             const Collection = DataBase.collection(this.BucketName);
 
             // Finding the first document in the collection
-            console.log(typeof Document_ID)
+            
             const Cursor = Collection.find({'ID': Document_ID}, { projection: { _id: 0 } });
             
             const Result = await Cursor.toArray();
