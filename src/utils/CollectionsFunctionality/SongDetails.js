@@ -62,13 +62,16 @@ class SongDetails {
             const Collection = DataBase.collection(this.BucketName);
 
             // Finding the first document in the collection
-            const Cursor = await Collection.find({'ID': {$eq: Document_ID}}, { projection: { _id: 0 } });
+            console.log(typeof Document_ID)
+            const Cursor = Collection.find({'ID': Document_ID}, { projection: { _id: 0 } });
+            
             const Result = await Cursor.toArray();
 
             await this.Client.close();
             console.log("Closed connection");
 
-            if (Result.length === 0) return 0; else return Result[0];
+            return Result[0];
+            // if (Result.length === 0) return 0; else 
 
 
         } catch (error){

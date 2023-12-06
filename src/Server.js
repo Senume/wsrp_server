@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-import base64 from "base64-js";
+import cors from "cors";
 import ffmpeg  from 'fluent-ffmpeg';
 import util from 'util';
 
@@ -71,6 +71,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.use(express.json());
+app.use(cors());
 
 
 // To -Do 
@@ -105,15 +106,17 @@ app.post('/login', async (req, res) => {
 app.get('/songdetails/:songid', async (req, res) => {
 
   const SongID = req.params.songid;
-  const SongDetails = await DatabaseObject.SongDetails.FindaDocument(SongID);
-  if (SongDetails) res.status(200).send(SongDetails); else res.status(404).send('No such song exists');
+  console.log(SongID);
+  const SongDetails = await DatabaseObject.SongsDB.FindaDocument(Number(SongID));
+  console.log(SongDetails)
+  if (SongDetails) res.status(200).json(SongDetails); else res.status(404).send('No such song exists');
 
 })
 
 // Return Playlist information based ID
 app.get('/playlistdetails/:playlistid', async (req, res) => {
   const PlaylistID = req.params.playlistid
-  const PlaylistDetails = await DatabaseObject.PlaylistDB.FindaPlaylist(PlaylistID);
+  const PlaylistDetails = await DatabaseObject.PlaylistDB.FindaPlaylist(Number(PlaylistID));
   if(PlaylistDetails) res.status(200).send(PlaylistDetails); else res.status(404).send('Playlist not available');
 
 })
@@ -138,23 +141,25 @@ app.post('/userupdate', async (req,res) => {
 app.post('/addsongdetails', async (req,res) => {
 
   const songData = req.body;
+  console.log(songData);
   const Result = DatabaseObject.SongsDB.UpdateSongDetails(songData);
-  if (Result) res.status(200).send('Song details updated'); else res.status(404).send('Error in the song details update');
+  if (Result) res.status(200).json({success: 1}); else res.status(404).json({success: 0});
 
 })
 
 app.post('/recognisesong', upload.single('audio') , async (req, res) => {
 
+  // Uploaded Temporary Audio File
   const Fileweb = process.cwd() + "/temp/data/" + req.fileName + '.webm';
   const Filemp3 = process.cwd() + "/temp/data/" + req.fileName + '.wav';
 
-  console.log(Filemp3);
-  console.log(Fileweb);
+  // Converting the encoding to from webm to s_pcm16_le (wav) format
   const string64 = await convertWavToBase64(Fileweb, Filemp3);
+  // Recognition details of the audio data.
+  const Result = await RecognitionObject.ProcessRecognition(string64);
 
-  const Result = RecognitionObject.ProcessRecognition(string64);
-
-  fs.unlink(Filemp3, (err) => {
+  // Delelting the Temporary Files
+  await fs.unlink(Filemp3, (err) => {
     if (err) {
       console.error(err);
     } else {
@@ -162,7 +167,7 @@ app.post('/recognisesong', upload.single('audio') , async (req, res) => {
     }
   });
 
-  fs.unlink(Fileweb, (err) => {
+  await fs.unlink(Fileweb, (err) => {
     if (err) {
       console.error(err);
     } else {
@@ -170,7 +175,9 @@ app.post('/recognisesong', upload.single('audio') , async (req, res) => {
     }
   });
 
-  res.status(200).send(Result);
+  // Reponse of the API call with the song details
+  console.log(Result)
+  res.status(200).json(Result.track);
 
 });
 
