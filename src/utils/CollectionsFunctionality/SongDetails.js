@@ -10,7 +10,7 @@ class SongDetails {
         this.URI = URI;
         this.DBName = dbName;
         this.BucketName = "SongDetails";
-        this.Client = new MongoClient(this.URI);
+        this.Client = new MongoClient(this.URI, { maxConnecting: 10});
     }
 
     /**
@@ -51,12 +51,11 @@ class SongDetails {
      */
 
     async FindaDocument(Document_ID) {
-
+        var Result = null;
         try {
 
             await this.Client.connect();
             console.log("Connected to the mongo server at " + this.URI);
-
             // Appending a document into the collection
             const DataBase = this.Client.db(this.DBName);
             const Collection = DataBase.collection(this.BucketName);
@@ -65,19 +64,49 @@ class SongDetails {
             
             const Cursor = Collection.find({'ID': Document_ID}, { projection: { _id: 0 } });
             
-            const Result = await Cursor.toArray();
+            Result = await Cursor.toArray();
 
-            await this.Client.close();
+            this.Client.close();
             console.log("Closed connection");
 
-            return Result[0];
+            
             // if (Result.length === 0) return 0; else 
 
 
         } catch (error){
-            console.error("Error: " + error.message);
-            throw new Error("Cannot retrive the specific document." );
+            console.error("Error in server while closing connection: " + error.message);
+            // throw new Error("Cannot retrive the specific document." );
         }
+
+        if  (Result) return Result[0]; else console.log("Problem")
+    }
+
+    async FindingallSongs(List) {
+        var Result = null;
+        try {
+
+            await this.Client.connect();
+            console.log("Connected to the mongo server at " + this.URI);
+            // Appending a document into the collection
+            const DataBase = this.Client.db(this.DBName);
+            const Collection = DataBase.collection(this.BucketName);
+
+            // Finding the first document in the collection
+            
+            const Cursor = Collection.find({'ID': {$in: List}}, { projection: { _id: 0 } });
+            
+            Result = await Cursor.toArray();
+
+            this.Client.close();
+            console.log("Closed connection");
+
+
+        } catch (error){
+            console.error("Error in server while closing connection: " + error.message);
+            // throw new Error("Cannot retrive the specific document." );
+        }
+
+        if  (Result) return Result; else return 0;
     }
 
 

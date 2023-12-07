@@ -106,9 +106,9 @@ app.post('/login', async (req, res) => {
 app.get('/songdetails/:songid', async (req, res) => {
 
   const SongID = req.params.songid;
-  console.log(SongID);
+  console.log("ID", SongID);
   const SongDetails = await DatabaseObject.SongsDB.FindaDocument(Number(SongID));
-  console.log(SongDetails)
+  console.log("Here", SongDetails)
   if (SongDetails) res.status(200).json(SongDetails); else res.status(404).send('No such song exists');
 
 })
@@ -180,6 +180,16 @@ app.post('/recognisesong', upload.single('audio') , async (req, res) => {
   res.status(200).json(Result.track);
 
 });
+
+app.post('/detaillist', async (req, res) => {
+  const list = req.body.listid;
+  try {
+    const Result = await DatabaseObject.SongsDB.FindingallSongs(list);
+    if (Result) res.status(200).json(Result); else res.status(404).send("Error at Server side.");
+  } catch (error) {
+    console.log("Errror at 'detaillist' enpoint: ", error.message);
+  }
+})
 
 
 app.listen(port, () => {
