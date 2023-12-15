@@ -7,11 +7,16 @@ import hashIt from "hash-it";               // Library to handle Hash functional
  */
 export default class Playlist {
 
-    constructor(playlistName, userId) {
+    constructor(playlistName, userId, dbName, URI) {
         this.Name = playlistName;
         this.UserId = userId;
         this.SongList = [];
         this.ID = null;
+
+        this.URI = URI;
+        this.DBName = dbName;
+        this.BucketName = "SongDetails";
+        this.Client = new MongoClient(this.URI, { maxConnecting: 10});
     }
 
     /**
@@ -54,10 +59,39 @@ export default class Playlist {
      */
     GetSongList() {
         return {
-                    id: this.ID,
-                    songname: this.Name,
-                    author: this.UserId,
-                    songlist: this.SongList
+                    ID: this.ID,
+                    Name: this.Name,
+                    UserId: this.UserId,
+                    SongList: this.SongList
                 }
     }
+
+
+    async UpdatePlaylist(Data){
+        try {
+            console.log(Data)
+            // Connecting to MongoDB server
+            await this.Client.connect();
+            console.log("Connected to the mongo server at " + this.URI);
+
+            // Appending a document into the collection
+            const DataBase = this.Client.db(this.DBName);
+            const Collection = DataBase.collection(this.BucketName);
+
+            const Result = await Collection.updateOne({'ID': {$eq: Data.ID}},{$set: Data}, {upsert: true});
+            console.log("Successful operation: ", Result);
+
+            // Closing the connection
+            this.Client.close();
+            console.log("Closed connection");
+            return 1;
+
+        } catch (error) {
+            console.log(error.message);
+            throw new Error("Document adding operation failed");
+        }
+
+    }
+
+
 }

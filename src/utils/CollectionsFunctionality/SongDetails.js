@@ -49,7 +49,6 @@ class SongDetails {
      * @param {number} Document_ID Unique ID of the document.
      * @returns {json} Returns JSON representation of the document.
      */
-
     async FindaDocument(Document_ID) {
         var Result = null;
         try {
@@ -92,7 +91,6 @@ class SongDetails {
             const Collection = DataBase.collection(this.BucketName);
 
             // Finding the first document in the collection
-            
             const Cursor = Collection.find({'ID': {$in: List}}, { projection: { _id: 0 } });
             
             Result = await Cursor.toArray();
@@ -104,12 +102,40 @@ class SongDetails {
         } catch (error){
             console.error("Error in server while closing connection: " + error.message);
             // throw new Error("Cannot retrive the specific document." );
+            return 0
         }
 
         if  (Result) return Result; else return 0;
     }
 
+    async FindAllSongsDatabase() {
+        try {
 
+            await this.Client.connect();
+            console.log("Connected to the mongo server at " + this.URI);
+            // Appending a document into the collection
+            const DataBase = this.Client.db(this.DBName);
+            const Collection = DataBase.collection(this.BucketName);
+
+            // Finding the first document in the collection
+            const Cursor = Collection.find({}, {projection: { ID: 1, _id: 0}});
+            
+            var Result = await Cursor.toArray();
+            Result = Result.map(item => {return item.ID});
+
+            this.Client.close();
+            console.log("Closed connection");
+
+            return Result
+
+
+        } catch (error){
+            console.error("Error in server while closing connection: " + error.message);
+            // throw new Error("Cannot retrive the specific document." );
+            return 0
+        }
+
+    }
 
 };
 

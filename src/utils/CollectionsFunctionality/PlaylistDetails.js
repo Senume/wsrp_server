@@ -82,6 +82,7 @@ class PlayListDetails {
 
             await this.Client.connect();
             console.log("Connected to the mongo server at " + this.URI);
+            console.log("Fetching Playlist data of ID: ", Document_ID)
 
             // Appending a document into the collection
             const DataBase = this.Client.db(this.DBName);
@@ -93,14 +94,14 @@ class PlayListDetails {
 
             await this.Client.close();
             console.log("Closed connection");
+            console.log("Result of the playlist Data: ", Result);
 
-            if (Result.length === 0) return 0; 
-            else return Result[0];
+            if (Result) return Result[0];
 
 
         } catch (error){
             console.error("Error: " + error.message);
-            throw new Error("Cannot retrive the specific document." );
+            // throw new Error("Cannot retrive the specific document." );
         }
     }
 
@@ -134,6 +135,33 @@ class PlayListDetails {
             console.error("Error: " + error.message);
             throw new Error("Cannot retrive the specific document." );
         }
+    }
+
+    async FindallPlaylist(list){
+        var Result = null;
+        try {
+
+            await this.Client.connect();
+            console.log("Connected to the mongo server at " + this.URI);
+            // Appending a document into the collection
+            const DataBase = this.Client.db(this.DBName);
+            const Collection = DataBase.collection(this.BucketName);
+
+            // Finding the first document in the collection
+            const Cursor = Collection.find({'ID': {$in: list}}, { projection: { _id: 0 } });
+            
+            Result = await Cursor.toArray();
+
+            this.Client.close();
+            console.log("Closed connection");
+
+
+        } catch (error){
+            console.error("Playlist Error: - Error in server: " + error.message);
+            console.log("Cannot retrive the specific document.");
+        }
+
+        if  (Result) return Result; else return 0;
     }
 }
 

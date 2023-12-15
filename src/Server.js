@@ -6,6 +6,8 @@ import fs from "fs";
 import cors from "cors";
 import ffmpeg  from 'fluent-ffmpeg';
 import util from 'util';
+import { MongoClient, GridFSBucket} from "mongodb";
+
 
 // Convertion functions 
 
@@ -66,9 +68,23 @@ const storage = multer.diskStorage({
   }
 });
 
+const storage1 = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'temp/uploads');
+  },
+  filename: function (req, file, cb) {
+      // Generate a unique filename here
+      const fileName = req.params.fileID + '.mp3';
+
+      // Attach the file name to the request object
+      cb(null, fileName);
+  }
+});
+
 //const storage = multer.memoryStorage();
 
 const upload = multer({ storage: storage });
+const upload1 = multer({ storage: storage1 });
 
 app.use(express.json());
 app.use(cors());
@@ -79,7 +95,7 @@ app.use(cors());
 // 2. Adding song to database
 // web token
 
-
+// User Database Operation
 // Handle registeration events
 app.post('/register', async (req, res) => {
   const userData = req.body;
@@ -102,6 +118,15 @@ app.post('/login', async (req, res) => {
   else res.status(403).send("Invalid username or password")
 })
 
+// Updates users state on the database
+app.post('/userupdate', async (req,res) => {
+
+  const userData = req.body;
+  await DatabaseObject.UsersDB.UpdateUser(userData);
+
+})
+
+// Song Databse Operations
 // Returns song details based on ID
 app.get('/songdetails/:songid', async (req, res) => {
 
@@ -113,31 +138,7 @@ app.get('/songdetails/:songid', async (req, res) => {
 
 })
 
-// Return Playlist information based ID
-app.get('/playlistdetails/:playlistid', async (req, res) => {
-  const PlaylistID = req.params.playlistid
-  const PlaylistDetails = await DatabaseObject.PlaylistDB.FindaPlaylist(Number(PlaylistID));
-  if(PlaylistDetails) res.status(200).send(PlaylistDetails); else res.status(404).send('Playlist not available');
-
-})
-
-// Retrives information on playlist based on its user ID
-app.get('/playlistdetails/User/:userid', async (req,res) => {
-
-  const UserID = req.params.userid
-  const PlaylistDetails = await DatabaseObject.PlaylistDB.FindaUserPlaylist(UserID);
-  if(PlaylistDetails.length !== 0) res.status(200).send(PlaylistDetails); else res.status(404).send('Playlist not available');
-
-})
-
-// Updates users state on the database
-app.post('/userupdate', async (req,res) => {
-
-  const userData = req.body;
-  await DatabaseObject.UsersDB.UpdateUser(userData);
-
-})
-
+// Adds a new song details to the database
 app.post('/addsongdetails', async (req,res) => {
 
   const songData = req.body;
@@ -147,6 +148,7 @@ app.post('/addsongdetails', async (req,res) => {
 
 })
 
+// API request to request the song details from third party.
 app.post('/recognisesong', upload.single('audio') , async (req, res) => {
 
   // Uploaded Temporary Audio File
@@ -179,16 +181,105 @@ app.post('/recognisesong', upload.single('audio') , async (req, res) => {
   console.log(Result)
   res.status(200).json(Result.track);
 
-});
+})
 
+// Retives song details as a list from list of song ids.
 app.post('/detaillist', async (req, res) => {
   const list = req.body.listid;
+  console.log("List of Song ID Data required: ",list)
   try {
     const Result = await DatabaseObject.SongsDB.FindingallSongs(list);
+    // console.log("Result of fetched Data for song ID: ",Result)
     if (Result) res.status(200).json(Result); else res.status(404).send("Error at Server side.");
   } catch (error) {
     console.log("Errror at 'detaillist' enpoint: ", error.message);
   }
+})
+
+app.get('/allsongs',async (req, res) => {
+  const Data = await DatabaseObject.SongsDB.FindAllSongsDatabase();
+  if (Data) res.status(200).send(Data); else res.status(404).send({success: 0});
+})
+
+// Playlist Databse Operations
+// Return Playlist information based ID
+app.get('/playlistdetails/:playlistid', async (req, res) => {
+  const PlaylistID = req.params.playlistid
+  const PlaylistDetails = await DatabaseObject.PlaylistDB.FindaPlaylist(Number(PlaylistID));
+  if(PlaylistDetails) res.status(200).send(PlaylistDetails); else res.status(404).send('Playlist not available');
+
+})
+
+// Retrives information on playlist based on its user ID
+app.get('/playlistdetails/User/:userid', async (req,res) => {
+
+  const UserID = req.params.userid
+  const PlaylistDetails = await DatabaseObject.PlaylistDB.FindaUserPlaylist(UserID);
+  if(PlaylistDetails.length !== 0) res.status(200).send(PlaylistDetails); else res.status(404).send('Playlist not available');
+
+})
+
+// adding an playlist into database
+app.post('/addplaylist', async (req, res) => {
+  const list = req.body.playlist;
+  try {
+    const Result = await DatabaseObject.PlaylistDB.UpdatePlaylist(list);
+    if (Result) res.status(200).json(Result); else res.status(404).send("Error at Server side.");
+  } catch (error) {
+    console.log("Errror at 'detaillist' enpoint: ", error.message);
+  }
+})
+
+// Retriving the array of playlist from database.
+app.post('/retrieve/playlist', async (req, res) => {
+  const list = req.body.listid;
+  console.log(list);
+  console.log(typeof list)
+
+  try {
+    const Result = await DatabaseObject.PlaylistDB.FindallPlaylist(list);
+    if (Result) res.status(200).json(Result); else res.status(404).send("Error at Server side.");
+  } catch (error) {
+    console.log("Errror at '/retrieve/playlist' enpoint: ", error.message);
+  }
+})
+
+// Media Databse Operations
+// Upload a audio file.
+app.post('/upload-audio/:fileID', upload1.single('audioFile'), async (req, res) => {
+
+  try {
+    console.log('File uploaded with unique code:', req.params.fileID);
+    DatabaseObject.MediaBD.uploadMP3File(process.cwd() + "/temp/uploads/" + req.params.fileID + ".mp3",req.params.fileID)
+    res.status(200).send('Audio file uploaded successfully.');
+  } catch (error) {
+    console.error('Error uploading audio file:', error);
+    res.status(500).send('Internal Server Error');
+  }
+
+});
+
+app.get("/stream/:fileID", async (req, res) => {
+  const fileID = req.params.fileID;
+  const Client = new MongoClient(url, { maxConnecting: 10});
+
+  try {
+    const database = Client.db(dbName);
+    const bucket = new GridFSBucket(database, {
+      bucketName: "Media",
+    });
+
+    const readStream = bucket.openDownloadStreamByName(fileID);
+    readStream.pipe(res);
+  } catch (error) {
+    console.error("Error streaming file:", error);
+    res.status(500).send("Internal Server Error");
+  }
+});
+
+app.get('/allmedia',async (req, res) => {
+  const Data = await DatabaseObject.MediaBD.FindAllSongsDatabase();
+  if (Data) res.status(200).send(Data); else res.status(404).send({success: 0});
 })
 
 
