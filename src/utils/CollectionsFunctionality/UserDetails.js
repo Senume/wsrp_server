@@ -14,10 +14,10 @@ class UsersDetails {
 
     /**
      * Function to find a user in the database collection 'UserDetails' and return the details of it
-     * @param {any} Username
+     * @param {any} UserName
      * @returns javscript object of user details
      */
-    async FindUser(Username) {
+    async FindUser(UserName) {
         try {
             await this.Client.connect();
             console.log("Connected to the mongo server at " + this.URI);
@@ -28,7 +28,7 @@ class UsersDetails {
 
             // Finding the first document in the collection
             const Cursor = Collection.find(
-                { Username: { $eq: Username } },
+                { UserName: { $eq: UserName } },
                 { projection: { _id: 0 } }
             );
             const Result = await Cursor.toArray();
@@ -60,7 +60,7 @@ class UsersDetails {
             const Collection = DataBase.collection(this.BucketName);
             // console.log("hello", Data);
             const Result = await Collection.updateOne(
-                { Username: { $eq: Data.Username } },
+                { UserName: { $eq: Data.UserName } },
                 {
                     $set: {
                         PlaylistList: Data.PlaylistList,
@@ -93,10 +93,10 @@ class UsersDetails {
             const Collection = DataBase.collection(this.BucketName);
             // console.log("hello", Data);
             const Result = await Collection.updateOne(
-                { Username: { $eq: Data.Username } },
+                { UserName: { $eq: Data.UserName } },
                 {
                     $set: {
-                        userType: Data.UserType,
+                        UserType: Data.UserType,
                     },
                 },
                 { upsert: true }
@@ -152,11 +152,11 @@ class UsersDetails {
             const Collection = DataBase.collection(this.BucketName);
             // console.log("hello", Data);
             const Result = await Collection.updateOne(
-                { Username: { $eq: Data.OldUser } },
+                { UserName: { $eq: Data.OldUser } },
                 {
                     $set: {
-                        Username: Data.Username,
-                        Email: Data.email,
+                        UserName: Data.UserName,
+                        Email: Data.Email,
                         // password: Data.HistoryList,
                         age: Data.age,
                         gender: Data.gender,

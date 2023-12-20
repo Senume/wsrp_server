@@ -1,4 +1,4 @@
-import { MongoClient} from "mongodb";
+import { MongoClient } from "mongodb";
 
 /**
  * Class to define the abstracted functionalities of SongDetail Database operation.
@@ -28,14 +28,17 @@ class PlayListDetails {
             const DataBase = this.Client.db(this.DBName);
             const Collection = DataBase.collection(this.BucketName);
 
-            const Result = await Collection.updateOne({'ID': {$eq: Data.ID}}, {$set: Data}, {upsert: true});
+            const Result = await Collection.updateOne(
+                { ID: { $eq: Data.ID } },
+                { $set: Data },
+                { upsert: true }
+            );
             console.log("Successful operation: ", Result);
 
             // Closing the connection
             this.Client.close();
             console.log("Closed connection");
             return 1;
-
         } catch (error) {
             console.log(error.message);
             throw new Error("Document adding operation failed");
@@ -56,15 +59,13 @@ class PlayListDetails {
             const Collection = DataBase.collection(this.BucketName);
 
             // Deleting a document from the collection.
-            const Result = await Collection.deleteOne({'ID': Document_ID});
-            console.log('Operation completed: ', Result);
+            const Result = await Collection.deleteOne({ ID: Document_ID });
+            console.log("Operation completed: ", Result);
 
             // Closing the connection
             this.Client.close();
             console.log("Closed connection");
             return 1;
-
-
         } catch (error) {
             console.error(error.message);
             throw new Error("Document Deleting operation failed");
@@ -73,23 +74,25 @@ class PlayListDetails {
 
     /**
      * Function to find a playlist document from the database using its unique ID.
-     * @param {number} Document_ID 
+     * @param {number} Document_ID
      * @returns {Object} Returns a Playlist document of secified document
      */
 
     async FindaPlaylist(Document_ID) {
         try {
-
             await this.Client.connect();
             console.log("Connected to the mongo server at " + this.URI);
-            console.log("Fetching Playlist data of ID: ", Document_ID)
+            console.log("Fetching Playlist data of ID: ", Document_ID);
 
             // Appending a document into the collection
             const DataBase = this.Client.db(this.DBName);
             const Collection = DataBase.collection(this.BucketName);
 
             // Finding the first document in the collection
-            const Cursor = Collection.find({'ID': {$eq: Document_ID}}, { projection: { _id: 0 } });
+            const Cursor = Collection.find(
+                { ID: { $eq: Document_ID } },
+                { projection: { _id: 0 } }
+            );
             const Result = await Cursor.toArray();
 
             await this.Client.close();
@@ -97,9 +100,7 @@ class PlayListDetails {
             console.log("Result of the playlist Data: ", Result);
 
             if (Result) return Result[0];
-
-
-        } catch (error){
+        } catch (error) {
             console.error("Error: " + error.message);
             // throw new Error("Cannot retrive the specific document." );
         }
@@ -111,7 +112,6 @@ class PlayListDetails {
      */
     async FindaUserPlaylist(Document_User_ID) {
         try {
-
             await this.Client.connect();
             console.log("Connected to the mongo server at " + this.URI);
 
@@ -120,27 +120,26 @@ class PlayListDetails {
             const Collection = DataBase.collection(this.BucketName);
 
             // Finding the first document in the collection
-            const Cursor = Collection.find({'UserId': {$eq: Document_User_ID}}, { projection: { _id: 0 } });
+            const Cursor = Collection.find(
+                { UserId: { $eq: Document_User_ID } },
+                { projection: { _id: 0 } }
+            );
             const DocumentArray = await Cursor.toArray();
-            
 
             // Closing the connection
             await this.Client.close();
             console.log("Closed connection");
 
             return DocumentArray;
-
-
-        } catch (error){
+        } catch (error) {
             console.error("Error: " + error.message);
-            throw new Error("Cannot retrive the specific document." );
+            // throw new Error("Cannot retrive the specific document." );
         }
     }
 
-    async FindallPlaylist(list){
+    async FindallPlaylist(list) {
         var Result = null;
         try {
-
             await this.Client.connect();
             console.log("Connected to the mongo server at " + this.URI);
             // Appending a document into the collection
@@ -148,20 +147,24 @@ class PlayListDetails {
             const Collection = DataBase.collection(this.BucketName);
 
             // Finding the first document in the collection
-            const Cursor = Collection.find({'ID': {$in: list}}, { projection: { _id: 0 } });
-            
+            const Cursor = Collection.find(
+                { ID: { $in: list } },
+                { projection: { _id: 0 } }
+            );
+
             Result = await Cursor.toArray();
 
             this.Client.close();
             console.log("Closed connection");
-
-
-        } catch (error){
-            console.error("Playlist Error: - Error in server: " + error.message);
+        } catch (error) {
+            console.error(
+                "Playlist Error: - Error in server: " + error.message
+            );
             console.log("Cannot retrive the specific document.");
         }
 
-        if  (Result) return Result; else return 0;
+        if (Result) return Result;
+        else return 0;
     }
 }
 

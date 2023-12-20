@@ -1,18 +1,16 @@
-export default  class User {
-
+export default class User {
     /**
-     * 
-     * @param {any} username Unique ID for logged-in user
+     *
+     * @param {any} UserName Unique ID for logged-in user
      * @param {any} password password to grant access token to logged-in user.
      */
-    constructor(username) {
-        this.Username = username;
-        this.Email =null;
+    constructor(UserName) {
+        this.UserName = UserName;
+        this.Email = null;
         this.UserType = null;
         this.PlaylistList = [];
         this.HistoryList = [];
         this.accessToken = null;
-
     }
 
     /**
@@ -21,30 +19,40 @@ export default  class User {
      */
     GetUserDetails() {
         const details = {
-            Username: this.Username,
+            UserName: this.UserName,
             Email: this.Email,
             UserType: this.UserType,
             PlaylistList: this.PlaylistList,
-            HistoryList: this.HistoryList
-        }
+            HistoryList: this.HistoryList,
+        };
         return details;
     }
 
     /**
      * Updates the access token for the current logged-in user.
-     * @param {any} accessToken 
+     * @param {any} accessToken
      */
     UpdateAccessToken(accessToken) {
         this.accessToken = accessToken;
     }
 
-    UploadSample(AudioFormFormat) {console.log("UploadSample for recognition")};
+    UploadSample(AudioFormFormat) {
+        console.log("UploadSample for recognition");
+    }
 
-    Login(){console.log("Login Process initiated")};
+    Login() {
+        console.log("Login Process initiated");
+    }
 
-    CreatePlaylist(playlistname){console.log("Create Playlist query initiated")};
+    CreatePlaylist(playlistname) {
+        console.log("Create Playlist query initiated");
+    }
 
-    AddToPlaylist(playlistid, songid){console.log("Add a song to respective playlist")};
+    AddToPlaylist(playlistid, songid) {
+        console.log("Add a song to respective playlist");
+    }
 
-    RegisterUser(username, password){console.log("Register the user")};
+    RegisterUser(UserName, password) {
+        console.log("Register the user");
+    }
 }

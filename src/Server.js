@@ -142,7 +142,7 @@ app.post("/finduser", async (req, res) => {
 app.post("/login", async (req, res) => {
     const userData = req.body;
     const ExistingUserData = await DatabaseObject.UsersDB.FindUser(
-        userData.Username
+        userData.UserName
     );
     if (ExistingUserData) {
         // const Result = await bcrypt.compare(
@@ -156,7 +156,7 @@ app.post("/login", async (req, res) => {
             req.session.user = ExistingUserData;
             return res.status(200).send(ExistingUserData);
         } else res.status(400).send("Invalid password");
-    } else res.status(403).send("Invalid username or password");
+    } else res.status(403).send("Invalid UserName or password");
 });
 
 app.post("/logout", async (req, res) => {
